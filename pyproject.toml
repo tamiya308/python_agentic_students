@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-agentic-students"
+version = "0.1.0"
+description = "FastAPI + DynamoDB student enrolments API"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard]>=0.143",   # includes uvicorn, python-multipart, email-validator
+    "boto3>=1.43",                # DynamoDB client
+    "python-dotenv>=1.2",         # loads .env
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.1",
+    "moto[dynamodb]>=5.2",        # in-memory DynamoDB for unit tests
+    "httpx2>=2.13",               # for FastAPI's TestClient
+    "ruff>=0.17",
+]
+
+[tool.setuptools.packages.find]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]                # makes `src.` imports work in tests
