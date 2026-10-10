@@ -23,12 +23,12 @@ You're working inside the **WAT framework** (Workflows, Agents, Tools). This arc
 - These scripts are consistent, testable, and fast
 
 ## How to Operate
-- Try to reuse exsting tools in the `tools/` folder.
-- After every chagnge run the unit tests. They must all pass before proceeding.
-- If you make some changes that involve more than 1 line, display a summary of the changes to me in the termainal and ask me to approve. Ask clarifying questions or give me alternatives to choose from if there is ambiguity.
+- Try to reuse existing tools in the `tools/` folder.
+- After every change run the unit tests. They must all pass before proceeding.
+- If there are changes beyond the requested scope, display a summary of the changes to me in the terminal and ask me to approve. Ask clarifying questions or give me alternatives to choose from if there is ambiguity.
 - Once I have approved the changes, stage & commit the code changes. 
--When you start the project, if there is no data, seed the sample data from 
-`src\seeds\seed_StudentEnrolements.py`
+- When you start the project, if there is no data, seed the sample data from 
+`src\seeds\seed_StudentEnrolments.py`
 -For unit testing, Use the moto library to simulate a dynamo db in memory.
 - Run every command from the project root. The `src.` module imports depend on it.
 - Format code with `.\tools\FormatPythonFile.ps1`, which runs `ruff format src tests` (Ruff is installed in `.venv`). Don't run `ruff format *`, which also reaches other directories.
@@ -39,8 +39,8 @@ You're working inside the **WAT framework** (Workflows, Agents, Tools). This arc
 ## Steps
 - Start the server from the project root: `.\tools\StartServer.ps1`
    Interactive docs Url: http://127.0.0.1:8000/docs
-- When you start the project, if there is no data in teh StudentEntrolements table, seed the data with this script `.\tools\SeedData.ps1`
-- Run the unit tests with tihs script `.\tools\RunUnitTests.ps1`
+- When you start the project, if there is no data in the StudentEntrolements table, seed the data with this script `.\tools\seed_StudentEnrolments.py.ps1`
+- Run the unit tests with this script `.\tools\RunUnitTests.ps1`
 
 ## Folder structure
 .github/    * Git files
@@ -52,6 +52,7 @@ out/		# Local final outputs, only when a deliverable can't go to a cloud service
 
 ## Context Boundaries (STRICT)
 ALLOWED directories (you may read, write, and list):
+- `.github/*`
 - `src/*`
 - `tests/`
 - `tools/`
@@ -73,7 +74,6 @@ ALLOWED directories (you may read, write, and list):
 - Review outputs before final delivery.
 
 ## Git commits
-Every time I ask for a series of instructions to be carried out, finish with a git commit:
 1. Run `.\tools\PreCommitCheck.ps1` (formats with Ruff, then runs the tests). Don't commit if a test fails; fix it or report it first.
 2. Commit only project files (`src/`, `tests/`, `tools/`, `workflows/`, `pyproject.toml`, `.gitignore`, `CLAUDE.md`). Never commit `.env`, `credentials.json`, `token.json` or `.venv/`; `.gitignore` already excludes them.
 3. Make one commit per logical change, with a message that says what changed and why.

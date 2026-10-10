@@ -10,3 +10,7 @@ pip install pytest
 pip install "fastapi[standard]"
 pip install uvicorn
 pip install httpx2
+
+// install all the core dependencies listed under the unset [project].dependencies section of the unset pyproject.toml file :
+unset pip install -e 
+
