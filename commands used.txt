@@ -1,1 +1,12 @@
-test
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+
+pip install boto3
+pip install awscli
+pip install "moto[dynamodb]"
+
+python -m pip install ruff
+pip install pytest
+pip install "fastapi[standard]"
+pip install uvicorn
+pip install httpx2
