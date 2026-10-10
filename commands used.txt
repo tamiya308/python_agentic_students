@@ -14,3 +14,7 @@ pip install httpx2
 // install all the core dependencies listed under the unset [project].dependencies section of the unset pyproject.toml file :
 unset pip install -e 
 
+// To start the dynamo db in docker locally:
+docker rm -f local-dynamodb
+docker run -d --name local-dynamodb -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -inMemory
+.\tools\SeedData.ps1
