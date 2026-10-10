@@ -6,7 +6,7 @@ Serve basic GET, POST, PUT and DELETE endpoints for StudentEnrolments. The back 
 - Create the Pydantic model in `src/models/StudentEnrolments.py`
 (use the StudentEnrolments sample data below as a reference for the model)
 - Create unit tests in `tests/test_student_enrolement_api.py`. Cover every response code for each of the end points. Each test uses mocked Moto db.
-- Use the environment variable "DynamoDbConnString" to get the dynamoDb connection string.
+- Use the environment variable "DynamoDbUrl" to get the dynamoDb url.
 - In `main.py` during the program startup generate code using the boto3 library to create the StudentEnrolments table if it doesn't already exist.
 - In `seed_StudentEnrolments.py` generate code to seed 5 new records into that table if there is no data. Do not run this code as part of the `main.py` execution. It should only be run on my command. 
 - Use the boto3 library to perform operations on the dynamoDb
