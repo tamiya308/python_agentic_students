@@ -19,3 +19,8 @@ unset pip install -e
 docker rm -f local-dynamodb
 docker run -d --name local-dynamodb -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -inMemory
 .\tools\SeedData.ps1
+
+aws configure --profile dev
+
+.\tools\StartServer.ps1 -Env dev
+.\tools\SeedData.ps1 -Env dev
