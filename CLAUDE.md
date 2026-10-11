@@ -39,7 +39,6 @@ You're working inside the **WAT framework** (Workflows, Agents, Tools). This arc
 ## Steps
 - Start the server from the project root: `.\tools\StartServer.ps1`
    Interactive docs Url: http://127.0.0.1:3000/docs
-- To start the server with debug-level logging: `.\tools\StartServerDebug.ps1`
 - When you start the project, if there is no data in the StudentEntrolements table, seed the data with this script `.\tools\seed_StudentEnrolments.py.ps1`
 - Run the unit tests with this script `.\tools\RunUnitTests.ps1`
 
