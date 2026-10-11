@@ -1,40 +1,52 @@
 import os
 
-import boto3
+from pynamodb.attributes import (
+    ListAttribute,
+    MapAttribute,
+    NumberAttribute,
+    UnicodeAttribute,
+)
+from pynamodb.models import Model
 
 TABLE_NAME = "StudentEnrolments"
 
 
-def get_dynamodb_resource():
-    """Create a boto3 DynamoDB resource from the DynamoDbUrl environment variable.
+class UnitAttribute(MapAttribute):
+    UnitId = NumberAttribute()
+    UnitName = UnicodeAttribute()
 
-    When DynamoDbUrl is set (e.g. DynamoDB Local), dummy credentials and a default
-    region are used unless the standard AWS_* variables are provided.
+
+class StudentEnrolmentRecord(Model):
+    """PynamoDB mapping for the StudentEnrolments table."""
+
+    class Meta:
+        table_name = TABLE_NAME
+        region = "ap-southeast-2"
+        billing_mode = "PAY_PER_REQUEST"
+
+    StudentId = NumberAttribute(hash_key=True)
+    StudentName = UnicodeAttribute()
+    CourseName = UnicodeAttribute(null=True)
+    UnitsToComplete = ListAttribute(of=UnitAttribute, default=list)
+
+
+def configure_db():
+    """Point the PynamoDB model at the DynamoDbUrl environment variable.
+
+    Called after load_dotenv(). When DynamoDbUrl is set (e.g. DynamoDB Local),
+    dummy credentials are used unless the standard AWS_* variables are provided.
     """
-    endpoint_url = os.getenv("DynamoDbUrl") or None
-    kwargs = {"region_name": os.getenv("AWS_REGION", "ap-southeast-2")}
-    if endpoint_url:
-        kwargs["endpoint_url"] = endpoint_url
-        kwargs["aws_access_key_id"] = os.getenv("AWS_ACCESS_KEY_ID", "local")
-        kwargs["aws_secret_access_key"] = os.getenv("AWS_SECRET_ACCESS_KEY", "local")
-    return boto3.resource("dynamodb", **kwargs)
+    meta = StudentEnrolmentRecord.Meta
+    meta.host = os.getenv("DynamoDbUrl") or None
+    meta.region = os.getenv("AWS_REGION", "ap-southeast-2")
+    if meta.host:
+        meta.aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID", "local")
+        meta.aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY", "local")
+    # Drop any cached connection so the new settings take effect.
+    StudentEnrolmentRecord._connection = None
 
 
-def create_table_if_missing(dynamodb):
+def create_table_if_missing():
     """Create the StudentEnrolments table if it doesn't already exist."""
-    existing = dynamodb.meta.client.list_tables()["TableNames"]
-    if TABLE_NAME in existing:
-        return dynamodb.Table(TABLE_NAME)
-    table = dynamodb.create_table(
-        TableName=TABLE_NAME,
-        KeySchema=[{"AttributeName": "StudentId", "KeyType": "HASH"}],
-        AttributeDefinitions=[{"AttributeName": "StudentId", "AttributeType": "N"}],
-        BillingMode="PAY_PER_REQUEST",
-    )
-    table.wait_until_exists()
-    return table
-
-
-def get_table():
-    """FastAPI dependency returning the StudentEnrolments table."""
-    return get_dynamodb_resource().Table(TABLE_NAME)
+    if not StudentEnrolmentRecord.exists():
+        StudentEnrolmentRecord.create_table(wait=True)

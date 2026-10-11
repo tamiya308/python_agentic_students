@@ -10,6 +10,7 @@ pip install pytest
 pip install "fastapi[standard]"
 pip install uvicorn
 pip install httpx2
+pip install pynamodb // This is an optional orm mapper between python & dynamoDb
 
 // install all the core dependencies listed under the unset [project].dependencies section of the unset pyproject.toml file :
 unset pip install -e 

@@ -9,7 +9,7 @@ description = "FastAPI + DynamoDB student enrolments API"
 requires-python = ">=3.14"
 dependencies = [
     "fastapi[standard]>=0.143",   # includes uvicorn, python-multipart, email-validator
-    "boto3>=1.43",                # DynamoDB client
+    "pynamodb>=6.1",              # DynamoDB ORM
     "python-dotenv>=1.2",         # loads .env
 ]
 

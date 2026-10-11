@@ -5,7 +5,7 @@ Run on demand from the project root: .\\tools\\SeedData.ps1
 
 from dotenv import load_dotenv
 
-from src.db import create_table_if_missing, get_dynamodb_resource
+from src.db import StudentEnrolmentRecord, configure_db, create_table_if_missing
 
 SAMPLE_ENROLMENTS = [
     {
@@ -55,20 +55,21 @@ SAMPLE_ENROLMENTS = [
 ]
 
 
-def seed(table) -> int:
+def seed() -> int:
     """Insert the sample records if the table has no data. Returns rows added."""
-    if table.scan(Limit=1).get("Items"):
+    if next(iter(StudentEnrolmentRecord.scan(limit=1)), None) is not None:
         return 0
-    with table.batch_writer() as batch:
+    with StudentEnrolmentRecord.batch_write() as batch:
         for item in SAMPLE_ENROLMENTS:
-            batch.put_item(Item=item)
+            batch.save(StudentEnrolmentRecord(**item))
     return len(SAMPLE_ENROLMENTS)
 
 
 def main():
     load_dotenv()
-    table = create_table_if_missing(get_dynamodb_resource())
-    added = seed(table)
+    configure_db()
+    create_table_if_missing()
+    added = seed()
     if added:
         print(f"Seeded {added} StudentEnrolments records.")
     else:
