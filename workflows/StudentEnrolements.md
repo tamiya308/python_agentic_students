@@ -8,7 +8,7 @@ Serve basic GET, POST, PUT and DELETE endpoints for StudentEnrolments. The back 
 - Create unit tests in `tests/test_student_enrolement_api.py`. Cover every response code for each of the end points. Each test uses mocked Moto db.
 - Use the environment variable "DynamoDbUrl" to get the dynamoDb url.
 - In `main.py` during the program startup generate code using the boto3 library to create the StudentEnrolments table if it doesn't already exist.
-- In `seed_StudentEnrolments.py` generate code to seed 5 new records into that table if there is no data. Do not run this code as part of the `main.py` execution. It should only be run on my command. 
+- In `seed_StudentEnrolments_LOCAL.py` (DynamoDB Local) and `seed_StudentEnrolments_DEV.py` (AWS dev, different sample data) generate code to seed 5 new records into that table if there is no data. Do not run this code as part of the `main.py` execution. It should only be run on my command. 
 - Use the boto3 library to perform operations on the dynamoDb
 
 ## StudentEnrolments sample data

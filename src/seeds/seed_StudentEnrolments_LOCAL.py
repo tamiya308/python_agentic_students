@@ -1,4 +1,4 @@
-"""Seed the StudentEnrolments table with sample data if it is empty.
+"""Seed the local (DynamoDB Local) StudentEnrolments table with sample data if it is empty.
 
 Run on demand from the project root: .\\tools\\SeedData.ps1
 """

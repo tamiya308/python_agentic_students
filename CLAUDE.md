@@ -28,7 +28,7 @@ You're working inside the **WAT framework** (Workflows, Agents, Tools). This arc
 - If there are changes beyond the requested scope, display a summary of the changes to me in the terminal and ask me to approve. Ask clarifying questions or give me alternatives to choose from if there is ambiguity.
 - Once I have approved the changes, stage & commit the code changes. 
 - When you start the project, if there is no data, seed the sample data from 
-`src\seeds\seed_StudentEnrolments.py`
+`src\seeds\seed_StudentEnrolments_LOCAL.py` (local) or `src\seeds\seed_StudentEnrolments_DEV.py` (dev)
 -For unit testing, Use the moto library to simulate a dynamo db in memory.
 - Run every command from the project root. The `src.` module imports depend on it.
 - Format code with `.\tools\FormatPythonFile.ps1`, which runs `ruff format src tests` (Ruff is installed in `.venv`). Don't run `ruff format *`, which also reaches other directories.
@@ -39,7 +39,7 @@ You're working inside the **WAT framework** (Workflows, Agents, Tools). This arc
 ## Steps
 - Start the server from the project root: `.\tools\StartServer.ps1` (local DynamoDB container, loads `.env.local`) or `.\tools\StartServer.ps1 -Env dev` (AWS, loads `.env.dev`). `.\tools\SeedData.ps1` takes the same `-Env` parameter.
    Interactive docs Url: http://127.0.0.1:3000/docs
-- When you start the project, if there is no data in the StudentEntrolements table, seed the data with this script `.\tools\seed_StudentEnrolments.py.ps1`
+- When you start the project, if there is no data in the StudentEntrolements table, seed the data with `.\tools\SeedData.ps1` (local) or `.\tools\SeedData.ps1 -Env dev` (AWS dev)
 - Run the unit tests with this script `.\tools\RunUnitTests.ps1`
 
 ## Folder structure
