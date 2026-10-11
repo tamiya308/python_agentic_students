@@ -3,8 +3,7 @@
 Run on demand from the project root: .\\tools\\SeedData.ps1
 """
 
-from dotenv import load_dotenv
-
+from src.config import load_env
 from src.db import StudentEnrolmentRecord, configure_db, create_table_if_missing
 
 SAMPLE_ENROLMENTS = [
@@ -66,7 +65,7 @@ def seed() -> int:
 
 
 def main():
-    load_dotenv()
+    load_env()
     configure_db()
     create_table_if_missing()
     added = seed()

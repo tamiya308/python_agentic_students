@@ -1,9 +1,10 @@
 from contextlib import asynccontextmanager
 
-from dotenv import load_dotenv
 from fastapi import FastAPI
 
-load_dotenv()
+from src.config import load_env
+
+load_env()
 
 from src.api import StudentEnrolments  # noqa: E402
 from src.db import configure_db, create_table_if_missing  # noqa: E402

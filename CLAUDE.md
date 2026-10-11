@@ -37,7 +37,7 @@ You're working inside the **WAT framework** (Workflows, Agents, Tools). This arc
 - PUT replaces the whole record. Send every field, or the omitted optional fields become null.
 
 ## Steps
-- Start the server from the project root: `.\tools\StartServer.ps1`
+- Start the server from the project root: `.\tools\StartServer.ps1` (local DynamoDB container, loads `.env.local`) or `.\tools\StartServer.ps1 -Env dev` (AWS, loads `.env.dev`). `.\tools\SeedData.ps1` takes the same `-Env` parameter.
    Interactive docs Url: http://127.0.0.1:3000/docs
 - When you start the project, if there is no data in the StudentEntrolements table, seed the data with this script `.\tools\seed_StudentEnrolments.py.ps1`
 - Run the unit tests with this script `.\tools\RunUnitTests.ps1`
