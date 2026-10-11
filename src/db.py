@@ -1,4 +1,5 @@
 import os
+import time
 
 from pynamodb.attributes import (
     ListAttribute,
@@ -50,3 +51,17 @@ def create_table_if_missing():
     """Create the StudentEnrolments table if it doesn't already exist."""
     if not StudentEnrolmentRecord.exists():
         StudentEnrolmentRecord.create_table(wait=True)
+
+
+def delete_table_if_exists() -> bool:
+    """Delete the StudentEnrolments table and wait until it's gone.
+
+    Returns False if the table didn't exist. Waiting matters on AWS, where a
+    table stays in DELETING for a few seconds and can't be recreated until then.
+    """
+    if not StudentEnrolmentRecord.exists():
+        return False
+    StudentEnrolmentRecord.delete_table()
+    while StudentEnrolmentRecord.exists():
+        time.sleep(1)
+    return True
