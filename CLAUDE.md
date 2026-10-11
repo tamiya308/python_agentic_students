@@ -61,7 +61,7 @@ ALLOWED directories (you may read, write, and list):
 - `.tmp/` (for generated data only)
 - `out/` (for final outputs)
 - `.venv/` (project-local virtualenv; install packages here only)
-- Root-level files only: `.env`, `pyproject.toml`, `.gitignore`, `CLAUDE.md`
+- Root-level files only: `.env`, `.env.local`, `.env.dev`, `pyproject.toml`, `.gitignore`, `CLAUDE.md`
 
 ## Language Type
 - Never make assumptions when important information is missing.
