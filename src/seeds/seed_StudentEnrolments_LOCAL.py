@@ -17,12 +17,46 @@ SAMPLE_ENROLMENTS = [
         ],
     },
     {
+        "StudentId": 1000,
+        "StudentName": "Alan Jones",
+        "CourseName": "Data Science",
+        "UnitsToComplete": [
+            {"UnitId": 90, "UnitName": "Statistics for data science"},
+        ],
+    },
+    {
+        "StudentId": 1000,
+        "StudentName": "Alan Jones",
+        "CourseName": "Law",
+        "UnitsToComplete": [
+            {"UnitId": 60, "UnitName": "Contract law"},
+            {"UnitId": 61, "UnitName": "Legal research and writing"},
+        ],
+    },
+    {
         "StudentId": 1001,
         "StudentName": "Priya Sharma",
         "CourseName": "Computer Science",
         "UnitsToComplete": [
             {"UnitId": 30, "UnitName": "Programming fundamentals"},
             {"UnitId": 31, "UnitName": "Data structures"},
+        ],
+    },
+    {
+        "StudentId": 1001,
+        "StudentName": "Priya Sharma",
+        "CourseName": "Mathematics",
+        "UnitsToComplete": [
+            {"UnitId": 35, "UnitName": "Linear algebra"},
+            {"UnitId": 36, "UnitName": "Calculus"},
+        ],
+    },
+    {
+        "StudentId": 1001,
+        "StudentName": "Priya Sharma",
+        "CourseName": "Physics",
+        "UnitsToComplete": [
+            {"UnitId": 37, "UnitName": "Mechanics"},
         ],
     },
     {
@@ -55,7 +89,7 @@ SAMPLE_ENROLMENTS = [
 
 
 def seed() -> int:
-    """Insert the sample records if the table has no data. Returns rows added."""
+    """Insert the sample records if the table has no data. Returns items added."""
     if next(iter(StudentEnrolmentRecord.scan(limit=1)), None) is not None:
         return 0
     with StudentEnrolmentRecord.batch_write() as batch:

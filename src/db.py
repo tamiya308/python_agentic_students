@@ -17,7 +17,7 @@ class UnitAttribute(MapAttribute):
 
 
 class StudentEnrolmentRecord(Model):
-    """PynamoDB mapping for the StudentEnrolments table."""
+    """PynamoDB mapping for the StudentEnrolments table: one item per student per course."""
 
     class Meta:
         table_name = TABLE_NAME
@@ -25,8 +25,8 @@ class StudentEnrolmentRecord(Model):
         billing_mode = "PAY_PER_REQUEST"
 
     StudentId = NumberAttribute(hash_key=True)
+    CourseName = UnicodeAttribute(range_key=True)
     StudentName = UnicodeAttribute()
-    CourseName = UnicodeAttribute(null=True)
     UnitsToComplete = ListAttribute(of=UnitAttribute, default=list)
 
 

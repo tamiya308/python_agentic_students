@@ -10,10 +10,26 @@ SAMPLE_ENROLMENTS = [
     {
         "StudentId": 2000,
         "StudentName": "Hannah Becker",
+        "CourseName": "Commerce",
+        "UnitsToComplete": [
+            {"UnitId": 20, "UnitName": "Introduction to business"},
+        ],
+    },
+    {
+        "StudentId": 2000,
+        "StudentName": "Hannah Becker",
         "CourseName": "Law",
         "UnitsToComplete": [
             {"UnitId": 60, "UnitName": "Contract law"},
             {"UnitId": 61, "UnitName": "Legal research and writing"},
+        ],
+    },
+    {
+        "StudentId": 2000,
+        "StudentName": "Hannah Becker",
+        "CourseName": "Psychology",
+        "UnitsToComplete": [
+            {"UnitId": 80, "UnitName": "Introduction to psychology"},
         ],
     },
     {
@@ -23,6 +39,23 @@ SAMPLE_ENROLMENTS = [
         "UnitsToComplete": [
             {"UnitId": 70, "UnitName": "Design studio 1"},
             {"UnitId": 71, "UnitName": "History of architecture"},
+        ],
+    },
+    {
+        "StudentId": 2001,
+        "StudentName": "Kwame Mensah",
+        "CourseName": "Engineering",
+        "UnitsToComplete": [
+            {"UnitId": 40, "UnitName": "Engineering mathematics"},
+            {"UnitId": 41, "UnitName": "Statics"},
+        ],
+    },
+    {
+        "StudentId": 2001,
+        "StudentName": "Kwame Mensah",
+        "CourseName": "Fine Arts",
+        "UnitsToComplete": [
+            {"UnitId": 75, "UnitName": "Drawing foundations"},
         ],
     },
     {
@@ -55,7 +88,7 @@ SAMPLE_ENROLMENTS = [
 
 
 def seed() -> int:
-    """Insert the sample records if the table has no data. Returns rows added."""
+    """Insert the sample records if the table has no data. Returns items added."""
     if next(iter(StudentEnrolmentRecord.scan(limit=1)), None) is not None:
         return 0
     with StudentEnrolmentRecord.batch_write() as batch:
